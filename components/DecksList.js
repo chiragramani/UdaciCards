@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, FlatList } from "react-native";
 import { fetchDecks } from "../utils/api";
 import { connect } from "react-redux";
 import { AppLoading } from "expo";
 import { addDecks } from "../actions/decks";
+import DeckCard from "./DeckCard";
 
 class DecksList extends Component {
   state = {
@@ -38,9 +39,11 @@ class DecksList extends Component {
       );
     }
     return (
-      <View>
-        <Text>List Component</Text>
-      </View>
+      <FlatList
+        data={decks}
+        keyExtractor={(item, index) => item.name}
+        renderItem={({ item }) => <DeckCard deck={item} />}
+      />
     );
   }
 }

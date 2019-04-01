@@ -20,10 +20,11 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     margin: 16,
     padding: 16,
-    justifyContent: "space-around"
+    justifyContent: "space-around",
+    backgroundColor: blue
   },
   text: {
-    color: "#4933FF",
+    color: "white",
     fontSize: 20,
     fontWeight: "bold"
   }

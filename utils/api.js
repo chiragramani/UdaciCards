@@ -1,7 +1,7 @@
 import { AsyncStorage } from "react-native";
 const DECKS_STORAGE_KEY = "UdaciCards:Decks";
 
-export function updateDeck({ deckName, deck }) {
+export function saveDeck(deckName, deck) {
   return AsyncStorage.mergeItem(
     DECKS_STORAGE_KEY,
     JSON.stringify({

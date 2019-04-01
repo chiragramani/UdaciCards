@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import { addDeck } from "../actions/decks";
+import { saveDeck } from "../utils/api";
 
 class AddDeck extends Component {
   state = {
@@ -18,10 +19,12 @@ class AddDeck extends Component {
   addDeck = () => {
     const { text } = this.state;
     const { dispatch } = this.props;
-    dispatch(addDeck(text));
+    const action = addDeck(text);
+    dispatch(action);
     this.setState({
       text: ""
     });
+    saveDeck(text, action.deck);
     Keyboard.dismiss();
   };
 

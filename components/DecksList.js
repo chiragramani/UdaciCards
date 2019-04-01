@@ -5,7 +5,7 @@ export default class DecksList extends Component {
   render() {
     return (
       <View>
-        <Text>AddDeck Component</Text>
+        <Text>List Component</Text>
       </View>
     );
   }

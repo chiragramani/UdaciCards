@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { View, Text } from "react-native";
 import { fetchDecks } from "../utils/api";
+import { connect } from "react-redux";
 
-export default class DecksList extends Component {
+class DecksList extends Component {
   render() {
     return (
       <View>
@@ -11,3 +12,11 @@ export default class DecksList extends Component {
     );
   }
 }
+
+function mapStateToProps({ decks }) {
+  return {
+    decks
+  };
+}
+
+export default connect(mapStateToProps)(DecksList);

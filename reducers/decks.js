@@ -1,4 +1,4 @@
-import { ADD_DECKS } from "../actions/decks";
+import { ADD_DECKS, DELETE_DECK } from "../actions/decks";
 
 export function decks(state = {}, action) {
   switch (action.type) {
@@ -7,6 +7,13 @@ export function decks(state = {}, action) {
       return {
         ...state,
         ...decks
+      };
+    case DELETE_DECK:
+      const { deck } = action;
+      return {
+        ...Object.keys(state)
+          .filter(aDeck => aDeck !== deck)
+          .map(deck => state[deck])
       };
     default:
       return state;

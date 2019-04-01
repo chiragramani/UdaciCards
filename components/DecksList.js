@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 
 class DecksList extends Component {
   render() {
+    const { decks } = this.props;
     return (
       <View>
         <Text>List Component</Text>
@@ -14,8 +15,9 @@ class DecksList extends Component {
 }
 
 function mapStateToProps({ decks }) {
+  const items = Object.keys(decks).map(deck => decks[deck]);
   return {
-    decks
+    decks: items
   };
 }
 

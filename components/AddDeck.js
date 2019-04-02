@@ -35,6 +35,7 @@ class AddDeck extends Component {
           <Text style={styles.text}>What is the title of your new deck?</Text>
           <TextInput
             style={styles.textInput}
+            placeholder='Enter Deck Title'
             onChangeText={text => this.setState({ text })}
             value={this.state.text}
           />
@@ -66,7 +67,8 @@ const styles = StyleSheet.create({
     borderColor: "gray",
     borderWidth: 1,
     alignSelf: "stretch",
-    marginTop: 32
+    marginTop: 32,
+    paddingLeft: 10
   },
   button: {
     padding: 16,

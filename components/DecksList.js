@@ -1,5 +1,11 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, FlatList } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  TouchableOpacity
+} from "react-native";
 import { fetchDecks } from "../utils/api";
 import { connect } from "react-redux";
 import { AppLoading } from "expo";
@@ -25,6 +31,16 @@ class DecksList extends Component {
       );
   }
 
+  onTap = item => {};
+
+  renderItem = ({ item }) => {
+    return (
+      <TouchableOpacity onPress={() => this.onTap(item)}>
+        <DeckCard deck={item} />
+      </TouchableOpacity>
+    );
+  };
+
   render() {
     const { ready } = this.state;
     const { decks } = this.props;
@@ -41,8 +57,8 @@ class DecksList extends Component {
     return (
       <FlatList
         data={decks}
-        keyExtractor={(item, index) => item.name}
-        renderItem={({ item }) => <DeckCard deck={item} />}
+        keyExtractor={(item, index) => item.title}
+        renderItem={this.renderItem}
       />
     );
   }

@@ -4,8 +4,7 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  StyleSheet,
-  Keyboard
+  StyleSheet
 } from "react-native";
 import { connect } from "react-redux";
 import { addDeck } from "../actions/decks";
@@ -18,14 +17,14 @@ class AddDeck extends Component {
 
   addDeck = () => {
     const { text } = this.state;
-    const { dispatch } = this.props;
+    const { dispatch, navigation } = this.props;
     const action = addDeck(text);
     dispatch(action);
+    saveDeck(text, action.deck);
+    navigation.navigate('DeckDetail')
     this.setState({
       text: ""
     });
-    saveDeck(text, action.deck);
-    Keyboard.dismiss();
   };
 
   render() {

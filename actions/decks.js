@@ -13,7 +13,7 @@ export function addDeck(deck) {
   return {
     type: ADD_DECK,
     deck: {
-      name: deck,
+      title: deck,
       questions: []
     }
   };

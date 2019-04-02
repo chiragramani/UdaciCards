@@ -31,7 +31,10 @@ class DecksList extends Component {
       );
   }
 
-  onTap = item => {};
+  onTap = item => {
+    const { navigation } = this.props;
+    navigation.navigate('DeckDetail')
+  };
 
   renderItem = ({ item }) => {
     return (

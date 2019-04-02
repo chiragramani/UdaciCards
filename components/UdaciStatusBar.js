@@ -6,7 +6,7 @@ import { blue } from "../utils/colors";
 export default function UdaciStatusBar() {
   return (
     <View style={{ height: Constants.statusBarHeight, backgroundColor: blue }}>
-      <StatusBar translucent backgroundColor={blue} barStyle="light-content"/>
+      <StatusBar translucent barStyle="light-content" />
     </View>
   );
 }

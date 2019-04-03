@@ -4,7 +4,8 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  StyleSheet
+  StyleSheet,
+  Alert
 } from "react-native";
 import { connect } from "react-redux";
 import { addDeck } from "../actions/decks";
@@ -17,14 +18,23 @@ class AddDeck extends Component {
 
   addDeck = () => {
     const { text } = this.state;
-    const { dispatch, navigation } = this.props;
-    const action = addDeck(text);
-    dispatch(action);
-    saveDeck(text, action.deck);
-    navigation.navigate('DeckDetail', { title: text } )
-    this.setState({
-      text: ""
-    });
+    const { decks } = this.props;
+    const filteredDecks = decks.filter(deckName => deckName === text);
+    if (filteredDecks.length === 0) {
+      const { dispatch, navigation } = this.props;
+      const action = addDeck(text);
+      dispatch(action);
+      saveDeck(text, action.deck);
+      navigation.navigate("DeckDetail", { title: text });
+      this.setState({
+        text: ""
+      });
+    } else {
+      Alert.alert(
+        "Error!",
+        "Deck with this name is already added.\nPlease try some other name."
+      );
+    }
   };
 
   render() {
@@ -34,7 +44,7 @@ class AddDeck extends Component {
           <Text style={styles.text}>What is the title of your new deck?</Text>
           <TextInput
             style={styles.textInput}
-            placeholder='Enter Deck Title'
+            placeholder="Enter Deck Title"
             onChangeText={text => this.setState({ text })}
             value={this.state.text}
           />
@@ -82,4 +92,10 @@ const styles = StyleSheet.create({
   }
 });
 
-export default connect()(AddDeck);
+function mapStateToProps({ decks }) {
+  return {
+    decks: Object.keys(decks)
+  };
+}
+
+export default connect(mapStateToProps)(AddDeck);

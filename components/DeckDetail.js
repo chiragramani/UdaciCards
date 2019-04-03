@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
 import { connect } from "react-redux";
 import { blue, white, red } from "../utils/colors";
 import { deleteDeck } from "../actions/decks";
@@ -33,7 +33,7 @@ class DeckDetail extends Component {
     const { deck } = this.props;
     const { title, questions } = deck;
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <Text style={styles.text}>{title}</Text>
         <Text style={styles.text}>{questions.length} Cards</Text>
         <TouchableOpacity onPress={this.startQuiz} style={styles.button}>
@@ -48,7 +48,7 @@ class DeckDetail extends Component {
         >
           <Text style={[styles.buttonText, styles.text]}>Delete Deck</Text>
         </TouchableOpacity>
-      </View>
+      </ScrollView>
     );
   }
 }

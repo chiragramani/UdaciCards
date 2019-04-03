@@ -1,22 +1,92 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { connect } from "react-redux";
+import { blue, white, red } from "../utils/colors";
+import { deleteDeck } from "../actions/decks";
+import { NavigationActions } from "react-navigation";
 
 class DeckDetail extends Component {
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: navigation.getParam("title")
+    };
+  };
+
+  shouldComponentUpdate(nextProps, nextState) {
+    const { deck } = nextProps;
+    return deck !== null;
+  }
+
+  addCard = () => {};
+
+  deleteDeck = () => {
+    const { dispatch, deck, navigation } = this.props;
+    dispatch(deleteDeck(deck));
+    navigation.dispatch(NavigationActions.back());
+  };
+
   render() {
+    const { deck } = this.props;
+    const { title, questions } = deck;
     return (
-      <View>
-        <Text>My Deck Detail</Text>
+      <View style={styles.container}>
+        <Text>{title}</Text>
+        <Text>{questions.length} Cards</Text>
+        <TouchableOpacity onPress={this.addCard} style={styles.button}>
+          <Text style={[styles.buttonText, styles.text]}>Add Card</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={this.deleteDeck}
+          style={[styles.button, styles.deleteButton]}
+        >
+          <Text style={[styles.buttonText, styles.text]}>Delete Deck</Text>
+        </TouchableOpacity>
       </View>
     );
   }
 }
 
-// function mapStateToProps({ decks }) {
-//     const deck = decks
-//   return {
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    margin: 16
+  },
+  text: {
+    textAlign: "center",
+    fontSize: 20,
+    fontWeight: "bold"
+  },
+  textInput: {
+    height: 40,
+    borderColor: "gray",
+    borderWidth: 1,
+    alignSelf: "stretch",
+    marginTop: 32,
+    paddingLeft: 10
+  },
+  button: {
+    padding: 16,
+    paddingLeft: 32,
+    paddingRight: 32,
+    backgroundColor: blue,
+    borderRadius: 6,
+    marginTop: 32
+  },
+  deleteButton: {
+    backgroundColor: red
+  },
+  buttonText: {
+    color: white
+  }
+});
 
-//   };
-// }
+function mapStateToProps({ decks }, { navigation }) {
+  const deckTitle = navigation.getParam("title");
+  const deck = decks[deckTitle] || null;
+  return {
+    deck
+  };
+}
 
-export default connect()(DeckDetail);
+export default connect(mapStateToProps)(DeckDetail);

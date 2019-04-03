@@ -8,7 +8,7 @@ import AddDeck from "./AddDeck";
 import DecksList from "./DecksList";
 import DeckDetail from "./DeckDetail";
 import { MaterialCommunityIcons, Ionicons } from "@expo/vector-icons";
-import { blue, white } from '../utils/colors'
+import { blue, white } from "../utils/colors";
 
 const TabNavigator = createBottomTabNavigator(
   {
@@ -60,13 +60,12 @@ const stackNavigator = createStackNavigator({
   },
   DeckDetail: {
     screen: DeckDetail,
-    navigationOptions: {
-      title: "Deck",
+    navigationOptions: () => ({
       headerTintColor: white,
       headerStyle: {
         backgroundColor: blue
       }
-    }
+    })
   }
 });
 

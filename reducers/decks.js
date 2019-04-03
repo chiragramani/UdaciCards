@@ -11,10 +11,9 @@ export function decks(state = {}, action) {
     }
     case DELETE_DECK: {
       const { deck } = action;
+      const { [deck.title]: value, ...remaining } = state;
       return {
-        ...Object.keys(state)
-          .filter(aDeck => aDeck !== deck)
-          .map(deck => state[deck])
+        ...remaining
       };
     }
     case ADD_DECK: {

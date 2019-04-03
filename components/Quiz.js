@@ -17,7 +17,7 @@ class Quiz extends Component {
     showAnswer: false
   };
 
-  handleAnswer = (isCorrect) => {
+  handleAnswer = isCorrect => {
     const { deck } = this.props;
     const { questions } = deck;
     const { questionIndex } = this.state;
@@ -39,13 +39,20 @@ class Quiz extends Component {
     }
   };
 
+  toggleQuestionAnswer = () => {
+    this.setState(previousState => ({
+      showAnswer: !previousState.showAnswer
+    }));
+  };
+
   render() {
     const { deck } = this.props;
     const { questions } = deck;
-    const { questionIndex } = this.state;
+    const { questionIndex, showAnswer, showResult, score } = this.state;
     const currentDisplayableIndex = questionIndex + 1;
     const totalQuestions = questions.length;
-    const question = questions[questionIndex];
+    const { question, answer } = questions[questionIndex];
+    const percentageScore = ((score / totalQuestions) * 100).toFixed(2) + "%";
     return (
       <ScrollView style={styles.container}>
         {questions.length === 0 && (
@@ -55,12 +62,35 @@ class Quiz extends Component {
           </Text>
         )}
 
-        {questions.length > 0 && (
+        {showResult == true && (
+            <View>
+              <Text style={styles.text}>
+                Congratulations on completing the quiz.
+              </Text>
+              <Text style={styles.text}>
+                Percentage score: {percentageScore}
+              </Text>
+            </View>
+          )}
+
+        {showResult == false && questions.length > 0 && (
           <View>
             <Text style={[styles.text, { textAlign: "left" }]}>
               {currentDisplayableIndex} / {totalQuestions}
             </Text>
-            <Text style={styles.text}>{question.question}</Text>
+            <Text style={styles.text}>
+              {showAnswer === true ? answer : question}
+            </Text>
+
+            <TouchableOpacity
+              onPress={this.toggleQuestionAnswer}
+              style={[styles.button, { backgroundColor: blue }]}
+            >
+              <Text style={[styles.buttonText, styles.text]}>
+                {showAnswer === true ? "View Question" : "View Answer"}
+              </Text>
+            </TouchableOpacity>
+
             <TouchableOpacity
               onPress={() => this.handleAnswer(true)}
               style={styles.button}

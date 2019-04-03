@@ -39,10 +39,24 @@ class Quiz extends Component {
     }
   };
 
+  restartQuiz = () => {
+    this.setState({
+      score: 0,
+      questionIndex: 0,
+      showResult: false,
+      showAnswer: false
+    });
+  };
+
   toggleQuestionAnswer = () => {
     this.setState(previousState => ({
       showAnswer: !previousState.showAnswer
     }));
+  };
+
+  goBackToDeck = () => {
+    const { navigation } = this.props;
+    navigation.goBack();
   };
 
   render() {
@@ -63,15 +77,26 @@ class Quiz extends Component {
         )}
 
         {showResult == true && (
-            <View>
-              <Text style={styles.text}>
-                Congratulations on completing the quiz.
-              </Text>
-              <Text style={styles.text}>
-                Percentage score: {percentageScore}
-              </Text>
-            </View>
-          )}
+          <View>
+            <Text style={styles.text}>
+              Congratulations on completing the quiz.
+            </Text>
+            <Text style={styles.text}>Percentage score: {percentageScore}</Text>
+            <TouchableOpacity
+              onPress={this.restartQuiz}
+              style={[styles.button, { backgroundColor: blue }]}
+            >
+              <Text style={[styles.buttonText, styles.text]}>Restart Quiz</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={this.goBackToDeck}
+              style={[styles.button, { backgroundColor: blue }]}
+            >
+              <Text style={[styles.buttonText, styles.text]}>Back to Deck</Text>
+            </TouchableOpacity>
+          </View>
+        )}
 
         {showResult == false && questions.length > 0 && (
           <View>

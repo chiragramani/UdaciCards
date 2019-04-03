@@ -16,7 +16,7 @@ The project will be evaluated by a Udacity code reviewer according to the [Udaci
 In the project directory, you can run:
 
 1. Install all the dependencies by running `yarn install`.
-2. `yarn start` Runs the app in the development mode.<br>.
+2. `yarn start` Runs the app in the development mode.<br>
 3. Console will print the bundle URL as well as display the QR code.
 4. To run the app with live reloading, choose one of:<br>
   • Scan the QR code above with the Expo app (Android) or the Camera app (iOS).<br>

@@ -6,10 +6,14 @@ import { createStore } from "redux";
 import reducer from "./reducers";
 import middleware from "./middleware";
 import { Provider } from "react-redux";
+import { setLocalNotification } from "./utils/api";
 
 const store = createStore(reducer, middleware);
 
 export default class App extends React.Component {
+  componentDidMount() {
+    setLocalNotification();
+  }
   render() {
     return (
       <Provider store={store}>

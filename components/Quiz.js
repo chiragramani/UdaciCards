@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import { blue, white, red, green } from "../utils/colors";
+import { setLocalNotification, clearLocalNotification } from "../utils/api";
 
 class Quiz extends Component {
   state = {
@@ -28,6 +29,7 @@ class Quiz extends Component {
         score: isCorrect ? previousState.score + 1 : previousState.score,
         showResult: true
       }));
+      clearLocalNotification().then(setLocalNotification);
     } else {
       /// Move to next question...
       this.setState(previousState => ({
@@ -62,6 +64,18 @@ class Quiz extends Component {
   render() {
     const { deck } = this.props;
     const { questions } = deck;
+    if (questions.length === 0) {
+      return (
+        <ScrollView style={styles.container}>
+          {questions.length === 0 && (
+            <Text style={styles.text}>
+              Sorry you cannot take this quiz since there are no cards in the
+              deck.
+            </Text>
+          )}
+        </ScrollView>
+      );
+    }
     const { questionIndex, showAnswer, showResult, score } = this.state;
     const currentDisplayableIndex = questionIndex + 1;
     const totalQuestions = questions.length;
@@ -69,13 +83,6 @@ class Quiz extends Component {
     const percentageScore = ((score / totalQuestions) * 100).toFixed(2) + "%";
     return (
       <ScrollView style={styles.container}>
-        {questions.length === 0 && (
-          <Text style={styles.text}>
-            Sorry you cannot take this quiz since there are no cards in the
-            deck.
-          </Text>
-        )}
-
         {showResult == true && (
           <View>
             <Text style={styles.text}>

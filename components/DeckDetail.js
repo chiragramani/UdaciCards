@@ -34,13 +34,11 @@ class DeckDetail extends Component {
     const { title, questions } = deck;
     return (
       <View style={styles.container}>
-        <Text>{title}</Text>
-        <Text>{questions.length} Cards</Text>
-        {questions.length > 0 && (
-          <TouchableOpacity onPress={this.startQuiz} style={styles.button}>
-            <Text style={[styles.buttonText, styles.text]}>Start Quiz</Text>
-          </TouchableOpacity>
-        )}
+        <Text style={styles.text}>{title}</Text>
+        <Text style={styles.text}>{questions.length} Cards</Text>
+        <TouchableOpacity onPress={this.startQuiz} style={styles.button}>
+          <Text style={[styles.buttonText, styles.text]}>Start Quiz</Text>
+        </TouchableOpacity>
         <TouchableOpacity onPress={this.addCard} style={styles.button}>
           <Text style={[styles.buttonText, styles.text]}>Add Card</Text>
         </TouchableOpacity>
@@ -64,14 +62,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 20,
     fontWeight: "bold"
-  },
-  textInput: {
-    height: 40,
-    borderColor: "gray",
-    borderWidth: 1,
-    alignSelf: "stretch",
-    marginTop: 32,
-    paddingLeft: 10
   },
   button: {
     padding: 16,

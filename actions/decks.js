@@ -1,6 +1,7 @@
 export const ADD_DECK = "ADD_DECK";
 export const ADD_DECKS = "ADD_DECKS";
 export const DELETE_DECK = "DELETE_DECK";
+export const ADD_CARD = "ADD_CARD";
 
 export function addDecks(decks) {
   return {
@@ -16,6 +17,14 @@ export function addDeck(deckName) {
       title: deckName,
       questions: []
     }
+  };
+}
+
+export function addCard({ question, answer }, deck) {
+  return {
+    type: ADD_CARD,
+    question: { question, answer },
+    deck
   };
 }
 

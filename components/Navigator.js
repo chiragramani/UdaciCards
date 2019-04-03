@@ -7,6 +7,7 @@ import {
 import AddDeck from "./AddDeck";
 import DecksList from "./DecksList";
 import DeckDetail from "./DeckDetail";
+import AddCard from "./AddCard";
 import { MaterialCommunityIcons, Ionicons } from "@expo/vector-icons";
 import { blue, white } from "../utils/colors";
 
@@ -61,6 +62,16 @@ const stackNavigator = createStackNavigator({
   DeckDetail: {
     screen: DeckDetail,
     navigationOptions: () => ({
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: blue
+      }
+    })
+  },
+  AddCard: {
+    screen: AddCard,
+    navigationOptions: () => ({
+      title: 'Add Card',
       headerTintColor: white,
       headerStyle: {
         backgroundColor: blue

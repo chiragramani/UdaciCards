@@ -1,4 +1,4 @@
-import { ADD_DECKS, DELETE_DECK, ADD_DECK } from "../actions/decks";
+import { ADD_DECKS, DELETE_DECK, ADD_DECK, ADD_CARD } from "../actions/decks";
 
 export function decks(state = {}, action) {
   switch (action.type) {
@@ -23,6 +23,17 @@ export function decks(state = {}, action) {
         [deck.title]: deck
       };
     }
+    case ADD_CARD: {
+      const { question, deck } = action;
+      return {
+        ...state,
+        [deck.title]: {
+          ...state[deck.title],
+          questions: state[deck.title].questions.concat(question)
+        }
+      };
+    }
+
     default:
       return state;
   }

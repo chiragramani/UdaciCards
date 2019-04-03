@@ -10,6 +10,15 @@ export function saveDeck(deckName, deck) {
   );
 }
 
+export function addCardToDeck(question, deck) {
+  return AsyncStorage.getItem(DECKS_STORAGE_KEY).then(results => {
+    const data = JSON.parse(results);
+    const updatedDeck = data[deck.title];
+    updatedDeck.questions = deck.questions.concat(question);
+    return saveDeck(deck.title, updatedDeck);
+  });
+}
+
 export function deleteDeckFromDB({ title }) {
   return AsyncStorage.getItem(DECKS_STORAGE_KEY).then(results => {
     const data = JSON.parse(results);

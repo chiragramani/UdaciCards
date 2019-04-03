@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { blue, white, red } from "../utils/colors";
 import { deleteDeck } from "../actions/decks";
 import { NavigationActions } from "react-navigation";
+import { deleteDeckFromDB } from "../utils/api";
 
 class DeckDetail extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -19,10 +20,13 @@ class DeckDetail extends Component {
 
   addCard = () => {};
 
+  startQuiz = () => {};
+
   deleteDeck = () => {
     const { dispatch, deck, navigation } = this.props;
     dispatch(deleteDeck(deck));
     navigation.dispatch(NavigationActions.back());
+    deleteDeckFromDB(deck);
   };
 
   render() {
@@ -32,10 +36,14 @@ class DeckDetail extends Component {
       <View style={styles.container}>
         <Text>{title}</Text>
         <Text>{questions.length} Cards</Text>
+        {questions.length > 0 && (
+          <TouchableOpacity onPress={this.startQuiz} style={styles.button}>
+            <Text style={[styles.buttonText, styles.text]}>Start Quiz</Text>
+          </TouchableOpacity>
+        )}
         <TouchableOpacity onPress={this.addCard} style={styles.button}>
           <Text style={[styles.buttonText, styles.text]}>Add Card</Text>
         </TouchableOpacity>
-
         <TouchableOpacity
           onPress={this.deleteDeck}
           style={[styles.button, styles.deleteButton]}

@@ -29,7 +29,10 @@ class DeckDetail extends Component {
     navigation.navigate("AddCard", { title: deck.title });
   };
 
-  startQuiz = () => {};
+  startQuiz = () => {
+    const { deck, navigation } = this.props;
+    navigation.navigate("Quiz", { title: deck.title });
+  };
 
   deleteDeck = () => {
     const { dispatch, deck, navigation } = this.props;

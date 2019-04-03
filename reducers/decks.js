@@ -20,7 +20,7 @@ export function decks(state = {}, action) {
       const { deck } = action;
       return {
         ...state,
-        [deck.name]: deck
+        [deck.title]: deck
       };
     }
     default:

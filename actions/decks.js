@@ -9,11 +9,11 @@ export function addDecks(decks) {
   };
 }
 
-export function addDeck(deck) {
+export function addDeck(deckName) {
   return {
     type: ADD_DECK,
     deck: {
-      title: deck,
+      title: deckName,
       questions: []
     }
   };

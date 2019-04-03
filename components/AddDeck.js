@@ -21,7 +21,7 @@ class AddDeck extends Component {
     const action = addDeck(text);
     dispatch(action);
     saveDeck(text, action.deck);
-    navigation.navigate('DeckDetail')
+    navigation.navigate('DeckDetail', { title: text } )
     this.setState({
       text: ""
     });

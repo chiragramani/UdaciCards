@@ -12,6 +12,9 @@ import Quiz from "./Quiz";
 import { MaterialCommunityIcons, Ionicons } from "@expo/vector-icons";
 import { blue, white } from "../utils/colors";
 
+import {SafeAreaView} from 'react-navigation';
+SafeAreaView.setStatusBarHeight(0);
+
 const TabNavigator = createBottomTabNavigator(
   {
     Decks: {
